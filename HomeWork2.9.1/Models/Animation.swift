@@ -6,9 +6,19 @@
 //
 
 struct Animation {
-    var preset: String
-    var curve: String
-    var force: Double
-    var duration: Double
-    var delay: Double
+    let preset: String
+    let curve: String
+    let force: Double
+    let duration: Double
+    let delay: Double
+}
+
+extension Animation {
+    static func getRandomAnimation() -> Animation {
+        Animation(preset: DataManager.shared.animationPreset.randomElement()?.rawValue ?? "",
+                  curve: DataManager.shared.animationCurve.randomElement()?.rawValue ?? "",
+                  force: Double.random(in: 0...1.5),
+                  duration: Double.random(in: 1...2),
+                  delay: Double.random(in: 0.2...0.5))
+    }
 }

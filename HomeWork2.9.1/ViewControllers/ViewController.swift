@@ -18,21 +18,11 @@ class ViewController: UIViewController {
     @IBOutlet var durationLabel: UILabel!
     @IBOutlet var delayLabel: UILabel!
     
-    private var animation: Animation!
+    private var animation = Animation.getRandomAnimation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getRandomAnimation()
         animationDescription()
-    }
-    
-    private func getRandomAnimation() {
-        animation = Animation(preset: Spring.AnimationPreset.allCases.randomElement()?.rawValue ?? "",
-                              curve: Spring.AnimationCurve.allCases.randomElement()?.rawValue ?? "",
-                              force: Double.random(in: 0...2),
-                              duration: Double.random(in: 0...2),
-                              delay: Double.random(in: 0...1))
     }
     
     private func animationDescription() {
@@ -55,7 +45,7 @@ class ViewController: UIViewController {
     @IBAction func runSpringAnimation() {
         animateView()
         animationDescription()
-        getRandomAnimation()
+        animation = Animation.getRandomAnimation()
         runButton.setTitle("Run \(animation.preset)", for: .normal)
     }
     
